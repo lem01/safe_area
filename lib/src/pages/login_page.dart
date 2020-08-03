@@ -16,6 +16,7 @@ class _LoginPageState extends State<LoginPage> {
   FocusNode _focusNodePass = FocusNode();
 
   GlobalKey<FormState> _formKey = GlobalKey();
+  // ignore: unused_field
   String _email = '', _password = '';
 
   @override

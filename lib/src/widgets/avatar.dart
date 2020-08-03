@@ -28,32 +28,36 @@ class _AvatarState extends State<Avatar> {
   //     _file = File(file.path);
   //   });
   // }
+
+  // tercera manera de hacerlo//////////////////////////////////
   File _image;
   final picker = ImagePicker();
 
   Future getImage() async {
     final pickedFile = await picker.getImage(source: ImageSource.gallery);
 
-    setState(() {
-      _image = File(pickedFile.path);
-    });
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path);
+      });
+    }
   }
 
-  // segunda manera de hacerlo//////////////////////////////////
-  File _file;
-  _openGallery() async {
-    final File file = await ImagePicker.pickImage(source: ImageSource.gallery);
-    setState(() {
-      _file = file;
-    });
-  }
+  // tercera manera de hacerlo(desactualizado)//////////////////////////////////
+  // File _file;
+  // _openGallery() async {
+  //   final File file = await ImagePicker.pickImage(source: ImageSource.gallery);
+  //   setState(() {
+  //     _file = file;
+  //   });
+  // }
 
-  _openCamera() async {
-    final File file = await ImagePicker.pickImage(source: ImageSource.camera);
-    setState(() {
-      _file = file;
-    });
-  }
+  // _openCamera() async {
+  //   final File file = await ImagePicker.pickImage(source: ImageSource.camera);
+  //   setState(() {
+  //     _file = file;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -62,13 +66,13 @@ class _AvatarState extends State<Avatar> {
         height: widget.size,
         child: Stack(
           children: [
-            _file == null
+            _image == null
                 ? SvgPicture.network(
                     'https://image.flaticon.com/icons/svg/1177/1177568.svg')
                 : ClipRRect(
                     borderRadius: BorderRadius.circular(100),
                     child: Image.file(
-                      _file,
+                      _image,
                       width: 200,
                       height: 200,
                       fit: BoxFit.cover,
@@ -84,7 +88,7 @@ class _AvatarState extends State<Avatar> {
                     child: Icon(Icons.edit),
                     size: widget.sizebtnEdit,
                   ),
-                  onPressed: () => _openCamera(),
+                  onPressed: () => getImage(),
                 ))
           ],
         ));

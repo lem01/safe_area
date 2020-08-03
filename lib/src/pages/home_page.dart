@@ -11,6 +11,10 @@ import 'package:safe_area/src/widgets/boton_menu.dart';
 import 'package:safe_area/src/widgets/my_appbar.dart';
 import 'package:safe_area/src/widgets/my_page_view.dart';
 
+import 'home_page_tabs/history_tab.dart';
+import 'home_page_tabs/home_tab.dart';
+import 'home_page_tabs/more_tan.dart';
+import 'home_page_tabs/oferts_tab.dart';
 import 'image_page.dart';
 
 class HomePage extends StatefulWidget {
