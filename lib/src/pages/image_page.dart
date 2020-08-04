@@ -29,8 +29,8 @@ class _ImagePageState extends State<ImagePage> {
         child: Column(
           children: [
             MyAppBar(
-              leftIcon: 'https://image.flaticon.com/icons/svg/860/860790.svg',
-              rightIcon: 'https://image.flaticon.com/icons/svg/126/126501.svg',
+              leftIcon: 'assets/icons/image.svg',
+              rightIcon: 'assets/icons/chat.svg',
               onLeftClick: () => Navigator.pop(context),
               onRightClick: () {},
             ),

@@ -67,8 +67,7 @@ class _AvatarState extends State<Avatar> {
         child: Stack(
           children: [
             _image == null
-                ? SvgPicture.network(
-                    'https://image.flaticon.com/icons/svg/1177/1177568.svg')
+                ? SvgPicture.asset('assets/icons/login.svg')
                 : ClipRRect(
                     borderRadius: BorderRadius.circular(100),
                     child: Image.file(

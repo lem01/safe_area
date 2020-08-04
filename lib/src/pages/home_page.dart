@@ -1,10 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:safe_area/src/pages/chat_page.dart';
-import 'package:safe_area/src/pages/page_home_tabs/history_tab.dart';
-import 'package:safe_area/src/pages/page_home_tabs/home_tab.dart';
-import 'package:safe_area/src/pages/page_home_tabs/more_tan.dart';
-import 'package:safe_area/src/pages/page_home_tabs/oferts_tab.dart';
 
 import 'package:safe_area/src/widgets/boton_menu.dart';
 
@@ -104,10 +100,8 @@ class _HomePageState extends State<HomePage> {
               children: [
                 //appBar
                 MyAppBar(
-                  leftIcon:
-                      'https://image.flaticon.com/icons/svg/685/685662.svg',
-                  rightIcon:
-                      'https://image.flaticon.com/icons/svg/126/126501.svg',
+                  leftIcon: 'assets/icons/back.svg',
+                  rightIcon: 'assets/icons/chat.svg',
                   onLeftClick: () {
                     Navigator.pushNamed(context, ImagePage.routName,
                         arguments:
