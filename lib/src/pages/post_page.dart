@@ -25,8 +25,9 @@ class _PostPageState extends State<PostPage> {
         child: Column(
           children: [
             MyAppBar(
-                leftIcon: 'assets/icons/image.svg',
-                rightIcon: 'assets/icons/chat.svg',
+                leftIcon: 'https://image.flaticon.com/icons/svg/860/860790.svg',
+                rightIcon:
+                    'https://image.flaticon.com/icons/svg/126/126501.svg',
                 onLeftClick: () => Navigator.pop(context),
                 onRightClick: () {
                   _data.add('item ${DateTime.now()}');

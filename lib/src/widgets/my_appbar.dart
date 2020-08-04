@@ -26,7 +26,7 @@ class MyAppBar extends StatelessWidget {
         children: [
           CupertinoButton(
               padding: EdgeInsets.all(15),
-              child: SvgPicture.asset(
+              child: SvgPicture.network(
                 leftIcon,
                 width: 30,
               ),
@@ -42,7 +42,7 @@ class MyAppBar extends StatelessWidget {
             child: Stack(children: [
               Padding(
                 padding: EdgeInsets.all(15),
-                child: SvgPicture.asset(
+                child: SvgPicture.network(
                   rightIcon,
                   width: 30,
                 ),
