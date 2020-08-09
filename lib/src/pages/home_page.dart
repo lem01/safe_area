@@ -100,7 +100,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 //appBar
                 MyAppBar(
-                  leftIcon: 'assets/icons/back.svg',
+                  leftIcon: 'assets/icons/image.svg',
                   rightIcon: 'assets/icons/chat.svg',
                   onLeftClick: () {
                     Navigator.pushNamed(context, ImagePage.routName,

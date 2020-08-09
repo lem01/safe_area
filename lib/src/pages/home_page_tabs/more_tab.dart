@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:safe_area/src/pages/login_page.dart';
+import 'package:safe_area/src/utils/dialogs.dart';
 import 'package:safe_area/src/widgets/avatar.dart';
+import 'package:safe_area/src/widgets/left_right_icon_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MoreTab extends StatefulWidget {
@@ -17,6 +19,15 @@ class _MoreTabState extends State<MoreTab> {
     await prefs.clear();
     Navigator.pushNamedAndRemoveUntil(
         context, LoginPage.routeNmae, (route) => false);
+  }
+
+  _confirm() async {
+    final isOk = await Dialogs.confirm(context,
+        title: "ACCIÓN REQUERIDA",
+        body: "Esta seguro de que desea cerrar sesion?");
+    if (isOk) {
+      _logOut();
+    }
   }
 
   @override
@@ -53,6 +64,12 @@ class _MoreTabState extends State<MoreTab> {
                 ],
               ),
             ),
+            LeftRihtIconButton(
+              leftIcon: 'assets/icons/logout.svg',
+              rightIcon: 'assets/icons/down-arrow.svg',
+              label: 'Cerrar Sesion',
+              onPressed: _confirm,
+            )
           ],
         ),
       ),

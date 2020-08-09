@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:safe_area/src/utils/dialogs.dart';
 import 'package:safe_area/src/widgets/my_btn.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -27,10 +28,17 @@ class _LoginPageState extends State<LoginPage> {
 
   _submint() async {
     final bool isValid = _formKey.currentState.validate();
-    if (isValid) {
+    if (isValid && _email == 'test@test.com' && _password == '123456') {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setBool('wasLogin', true);
       Navigator.pushReplacementNamed(context, 'home');
+    } else {
+      await Dialogs.alert(
+        context,
+        title: "ERROR",
+        body: "E-mail o contraseña incorrectos",
+      );
+      print('lalalaa');
     }
   }
 
