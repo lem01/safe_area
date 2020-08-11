@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
           PostPage.routeName: (_) => PostPage(),
           LoginPage.routeNmae: (context) => LoginPage()
         },
+        theme: ThemeData(fontFamily: 'Roboto'),
       ),
     );
   }

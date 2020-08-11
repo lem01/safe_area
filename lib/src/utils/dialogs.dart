@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:wasm';
 
 import 'package:flutter/cupertino.dart';
 
@@ -125,5 +124,121 @@ class Dialogs {
     //       });
 
     return c.future;
+  }
+
+  //otro dialogo
+  static void input(BuildContext context,
+      {String label,
+      String placeholder,
+      @required void Function(String) onOk}) {
+    String text = '';
+
+    showCupertinoDialog(
+        context: context,
+        builder: (_) {
+          return CupertinoAlertDialog(
+            title: label != null ? Text(label) : null,
+            content: CupertinoTextField(
+              onChanged: (String _text) {
+                text = _text;
+              },
+              placeholder: placeholder,
+            ),
+            actions: [
+              CupertinoButton(
+                  child: Text('ACEPTAR'),
+                  onPressed: () {
+                    onOk(text);
+                    Navigator.pop(context);
+                  })
+            ],
+          );
+        });
+  }
+
+  //input dialog para email
+  static void inputEmail(BuildContext context,
+      {String label,
+      String placeholder,
+      @required void Function(String) onOk}) {
+    showCupertinoDialog(
+        context: context,
+        builder: (_) {
+          return CupertinoAlertDialog(
+              title: label != null
+                  ? Padding(
+                      padding: const EdgeInsets.only(bottom: 9.0),
+                      child: Text(label),
+                    )
+                  : null,
+              content: InputEmail(
+                placeholder: placeholder,
+                onOk: (text) {
+                  if (onOk != null) onOk(text);
+                },
+              ));
+        });
+  }
+}
+
+class InputEmail extends StatefulWidget {
+  final String placeholder;
+  final void Function(String) onOk;
+
+  InputEmail({Key key, this.placeholder, @required this.onOk})
+      : super(key: key);
+
+  @override
+  _InputEmailState createState() => _InputEmailState();
+}
+
+class _InputEmailState extends State<InputEmail> {
+  String _email = '';
+
+  bool _validate() {
+    return (_email.contains("@"));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final isValid = _validate();
+
+    return Column(
+      children: [
+        CupertinoTextField(
+          onChanged: (String text) {
+            _email = text;
+            _validate();
+            setState(() {});
+          },
+          placeholder: widget.placeholder,
+        ),
+        Row(
+          children: [
+            Expanded(
+              child: FlatButton(
+                  // color: Colors.blue,
+                  onPressed: () => Navigator.pop(context),
+                  child: Text(
+                    'CANCELAR',
+                    style: TextStyle(color: Colors.red),
+                  )),
+            ),
+            Expanded(
+              child: FlatButton(
+                  onPressed: isValid
+                      ? () {
+                          Navigator.pop(context);
+                          widget.onOk(_email);
+                        }
+                      : null,
+                  child: Text('ACEPTAR',
+                      style: TextStyle(
+                          color: isValid ? Colors.blue : Colors.black45))),
+            )
+          ],
+        )
+      ],
+    );
   }
 }

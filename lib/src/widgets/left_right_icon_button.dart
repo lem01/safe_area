@@ -3,11 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class LeftRihtIconButton extends StatelessWidget {
-  final String leftIcon, rightIcon, label;
+  final String leftIcon, label;
   final VoidCallback onPressed;
+  final Widget rightContent;
 
   const LeftRihtIconButton(
-      {Key key, this.leftIcon, this.rightIcon, this.label = '', this.onPressed})
+      {Key key,
+      this.leftIcon,
+      this.label = '',
+      this.onPressed,
+      this.rightContent})
       : super(key: key);
 
   @override
@@ -45,14 +50,10 @@ class LeftRihtIconButton extends StatelessWidget {
                 ],
               ),
             ),
-            if (rightIcon != null)
+            if (rightContent != null)
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: SvgPicture.asset(
-                  rightIcon,
-                  width: 30,
-                  height: 25,
-                ),
+                child: rightContent,
               )
           ],
         ),

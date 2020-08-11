@@ -29,11 +29,14 @@ class MyAppBar extends StatelessWidget {
               child: SvgPicture.asset(
                 leftIcon,
                 width: 30,
+                color: Colors.black,
               ),
               onPressed: onLeftClick),
-          Text(
-            'Logo',
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          Image.asset(
+            'assets/images/logo 2.png',
+            width: 250,
+            height: 35,
+            color: Color(0xff304ffe),
           ),
           CupertinoButton(
             onPressed: onRightClick,
