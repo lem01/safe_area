@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:safe_area/src/widgets/avatar.dart';
+import 'package:safe_area/api/account_api.dart';
+import 'package:shimmer/shimmer.dart';
 
 class HomeTab extends StatefulWidget {
   HomeTab({Key key}) : super(key: key);
@@ -10,167 +11,98 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> {
-  final estilo = TextStyle(fontSize: 18, color: Colors.black87);
-  // bool _isEnable = false;
+  AccountApi _accountApi = AccountApi();
+  List<dynamic> _users = [];
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    _load();
+    super.initState();
+  }
+
+  _load() async {
+    final users = await _accountApi.getUsers(2);
+    setState(() {
+      _users.addAll(users);
+      _isLoading = false;
+    });
+  }
+
+  Widget _shimmer() {
+    return Container(
+      height: 120,
+      child: ListView.builder(
+        itemBuilder: (_, index) {
+          return Shimmer(
+              period: Duration(
+                seconds: 2,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Container(
+                      width: 70,
+                      height: 70,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Color(0xffcccccc),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 3,
+                    ),
+                    Container(
+                      height: 13,
+                      width: 50,
+                      color: Colors.white,
+                    )
+                  ],
+                ),
+              ),
+              gradient: LinearGradient());
+        },
+        itemCount: 7,
+        scrollDirection: Axis.horizontal,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        width: double.infinity,
-        height: double.infinity,
-        child: LayoutBuilder(builder: (context, contraints) {
-          return SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                  height: contraints.maxHeight * 0.50,
-                  color: Color(0xfff8f8f8),
-                  width: double.infinity,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Avatar(
-                        size: contraints.maxHeight * 0.30,
-                        // sizebtnEdit: contraints.maxHeight * 0.1,
+    return ListView(
+      children: [
+        _isLoading
+            ? _shimmer()
+            : Container(
+                height: 120,
+                child: ListView.builder(
+                  itemBuilder: (_, index) {
+                    final dynamic item = _users[index];
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(minWidth: 80),
+                        child: Column(children: [
+                          Expanded(
+                            child: ClipOval(
+                              child: Image.network(
+                                item["avatar"],
+                              ),
+                            ),
+                          ),
+                          Text(item["first_name"]),
+                        ]),
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        'Bienvenido',
-                        style: estilo,
-                      ),
-                      Text(
-                        'Lennox Monge',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
+                    );
+                  },
+                  itemCount: _users.length,
+                  scrollDirection: Axis.horizontal,
                 ),
-                Container(
-                  height: 120,
-                  // width: 100,
-                  // color: Colors.blue,
-                  child: ListView.builder(
-                    itemBuilder: (_, index) {
-                      return Container(
-                        width: 120,
-                        height: 120,
-                        color: Colors.black12,
-                        margin: EdgeInsets.all(5),
-                      );
-                    },
-                    itemCount: 10,
-                    scrollDirection: Axis.horizontal,
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  height: 120,
-                  // width: 100,
-                  // color: Colors.blue,
-                  child: ListView.builder(
-                    itemBuilder: (_, index) {
-                      return Container(
-                        width: 120,
-                        height: 120,
-                        color: Colors.black12,
-                        margin: EdgeInsets.all(5),
-                      );
-                    },
-                    itemCount: 10,
-                    scrollDirection: Axis.horizontal,
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  height: 120,
-                  // width: 100,
-                  // color: Colors.blue,
-                  child: ListView.builder(
-                    itemBuilder: (_, index) {
-                      return Container(
-                        width: 120,
-                        height: 120,
-                        color: Colors.black12,
-                        margin: EdgeInsets.all(5),
-                      );
-                    },
-                    itemCount: 10,
-                    scrollDirection: Axis.horizontal,
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  height: 120,
-                  // width: 100,
-                  // color: Colors.blue,
-                  child: ListView.builder(
-                    itemBuilder: (_, index) {
-                      return Container(
-                        width: 120,
-                        height: 120,
-                        color: Colors.black12,
-                        margin: EdgeInsets.all(5),
-                      );
-                    },
-                    itemCount: 10,
-                    scrollDirection: Axis.horizontal,
-                  ),
-                ),
-
-                // SizedBox(
-                //   height: 10,
-                // ),
-                //creamos el widged cronometro y le ponemos una condicion
-                // _isEnable == true
-                //     ? Cronometro(
-                //         initTime: 0,
-                //         fonSize: 40,
-                //       )
-                //     : Container(),
-                // SizedBox(
-                //   height: 10,
-                // ),
-                // CupertinoButton(
-                //     padding: EdgeInsets.symmetric(horizontal: 20),
-                //     color: Colors.blue,
-                //     child: Text('Enable: $_isEnable'),
-                //     onPressed: () {
-                //       setState(() {
-                //         _isEnable = !_isEnable;
-                //       });
-                //     }),
-                // SizedBox(
-                //   height: 20,
-                // ),
-                // CupertinoButton(
-                //     padding: EdgeInsets.symmetric(horizontal: 20),
-                //     color: Colors.green,
-                //     child: Text('Go to Chat'),
-                //     onPressed: () {
-                //       setState(() {
-                //         // Navigator.pushNamed(context, ChatPage().toString());
-                //       });
-                //     })
-
-                // MyBtn(
-                //   label: 'My post',
-                //   onPressed: () {
-                //     Navigator.pushNamed(context, PostPage.routeName);
-                //   },
-                // )
-              ],
-            ),
-          );
-        }));
+              )
+      ],
+    );
   }
 
 // en el caso de usar pageView.builder

@@ -23,22 +23,27 @@ class _SplashPageState extends State<SplashPage> with AfterLayoutMixin {
   /// o cualquer llamada que requiera de un contexto asociado con una vista renderizada
   @override
   void afterFirstLayout(BuildContext context) {
-    Future.delayed(Duration(seconds: 2)).then((value) {
-      print('ir al home');
+    Future.delayed(Duration(seconds: 2)).then((_) {
+      // print('ir al home');
       // Navigator.pushReplacementNamed(context, LoginPage.routeNmae);
       this._checkLogin();
     });
   }
 
   _checkLogin() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    final bool wasLogin = prefs.getBool('wasLogin');
-    print('wasLogin: $wasLogin');
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      final bool wasLogin = prefs.getBool('wasLogin');
+      print('wasLogin: $wasLogin');
 
-    if (wasLogin == null || wasLogin == false) {
-      Navigator.pushReplacementNamed(context, LoginPage.routeNmae);
-    } else
-      Navigator.pushReplacementNamed(context, 'home');
+      if (wasLogin == null || wasLogin == false) {
+        // if (wasLogin == null) {
+        Navigator.pushReplacementNamed(context, LoginPage.routeNmae);
+      } else
+        Navigator.pushReplacementNamed(context, 'home');
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
