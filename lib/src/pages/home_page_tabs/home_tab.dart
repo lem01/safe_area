@@ -35,33 +35,37 @@ class _HomeTabState extends State<HomeTab> {
       child: ListView.builder(
         itemBuilder: (_, index) {
           return Shimmer(
-              period: Duration(
-                seconds: 2,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    Container(
-                      width: 70,
-                      height: 70,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Color(0xffcccccc),
-                      ),
+            gradient: LinearGradient(
+                begin: Alignment.center,
+                colors: [Colors.grey[50], Colors.black12]),
+            period: Duration(
+              seconds: 2,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Container(
+                    width: 70,
+                    height: 70,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color(0xffcccccc),
                     ),
-                    SizedBox(
-                      height: 3,
-                    ),
-                    Container(
-                      height: 13,
-                      width: 50,
-                      color: Colors.white,
-                    )
-                  ],
-                ),
+                  ),
+                  SizedBox(
+                    height: 3,
+                  ),
+                  Container(
+                    height: 13,
+                    width: 50,
+                    color: Colors.white,
+                  )
+                ],
               ),
-              gradient: LinearGradient());
+            ),
+            // gradient: LinearGradient()
+          );
         },
         itemCount: 7,
         scrollDirection: Axis.horizontal,

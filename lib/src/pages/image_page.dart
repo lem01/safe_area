@@ -19,7 +19,7 @@ class ImagePage extends StatefulWidget {
 class _ImagePageState extends State<ImagePage> {
   @override
   Widget build(BuildContext context) {
-    ImagePageArgs arg = ModalRoute.of(context).settings.arguments;
+    // ImagePageArgs arg = ModalRoute.of(context).settings.arguments;
 
     return Scaffold(
       body: SafeArea(

@@ -25,7 +25,8 @@ class BotonMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.only(bottom: 2),
+      // margin: EdgeInsets.only(bottom: 2),
       child: SafeArea(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -34,8 +35,9 @@ class BotonMenu extends StatelessWidget {
             final BotonMenuItem item = items[index];
             return Expanded(
               child: Container(
-                // color: Colors.blue,
+                color: Colors.white,
                 child: CupertinoButton(
+                  // pressedOpacity: 0.8,
                   padding: EdgeInsets.zero,
                   onPressed: () => onChanged(index),
                   child: Column(
@@ -43,18 +45,18 @@ class BotonMenu extends StatelessWidget {
                     children: [
                       SvgPicture.asset(
                         item.iconPath,
-                        width: 40,
-                        height: 35,
+                        width: 25.5,
+                        height: 25.5,
                         color: isActive == true ? Colors.blue : Colors.black,
                       ),
                       SizedBox(
-                        height: 4,
+                        height: 2,
                       ),
                       Text(item.label,
                           style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 11.60,
                               color: isActive == true
-                                  ? Colors.black
+                                  ? Colors.blue
                                   : Colors.black))
                     ],
                   ),

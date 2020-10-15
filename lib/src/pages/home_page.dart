@@ -148,14 +148,14 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // ignore: non_constant_identifier_names
-  Widget Navegacion_boton() {
-    return BottomNavigationBar(backgroundColor: Color(0xfff0f0f0), items: [
-      BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Inicio')),
-      BottomNavigationBarItem(
-          icon: Icon(Icons.history), title: Text('Historial')),
-      BottomNavigationBarItem(icon: Icon(Icons.subject), title: Text('Oferas')),
-      //  BottomNavigationBarItem(icon: Icon(Icons.menu), title: Text('Mas'))
-    ]);
-  }
+  // // ignore: non_constant_identifier_names
+  // Widget Navegacion_boton() {
+  //   return BottomNavigationBar(backgroundColor: Color(0xfff0f0f0), items: [
+  //     BottomNavigationBarItem(icon: Icon(Icons.home), title: Text('Inicio')),
+  //     BottomNavigationBarItem(
+  //         icon: Icon(Icons.history), title: Text('Historial')),
+  //     BottomNavigationBarItem(icon: Icon(Icons.subject), title: Text('Oferas')),
+  //     //  BottomNavigationBarItem(icon: Icon(Icons.menu), title: Text('Mas'))
+  //   ]);
+  // }
 }
